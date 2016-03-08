@@ -1,0 +1,60 @@
+{\n}
+# Usage{\n}
+{\n}
+Sometimes, you just need to print out a simple usage message, this will look in 
+the classpath to find the text files and output them to the console.{\n}
+{\n}
+There are two usage scenarios:{\n}
+{\n}
+ 1. Print out a simple usage message{\n}
+ 1. Print out a longer, more helpful usage message{\n}
+{\n}
+If there is a `Throwable` parameter, the stacktrace will be printed to the console{\n}
+{\n}
+The `usage` method signatures will look in the classpath for a file named 
+`USAGE.txt` or `usage.txt` and output the contents (if found) to the console.{\n}
+{\n}
+The `help` method signatures will look in the classpath for a file named 
+`HELP.txt` or `help.txt`, this will first output the `USAGE.txt` file, and then 
+the `HELP.txt` file.{\n}
+{\n}
+## Method signatures{\n}
+{\n}
+{\n}
+```{\n}
+{\t}// print out the usage message{\n}
+{\t}public static void usage(){\n}
+{\t}public static void usage(Throwable throwable){\n}
+{\t}public static void usage(String message){\n}
+{\t}public static void usage(String message, Throwable throwable){\n}
+{\n}
+{\t}// print out the usage message and exit{\n}
+{\t}public static void usageAndExit(){\n}
+{\t}public static void usageAndExit(Throwable throwable){\n}
+{\t}public static void usageAndExit(String message){\n}
+{\t}public static void usageAndExit(String message, Throwable throwable){\n}
+{\t}public static void usageAndExit(int exitCode){\n}
+{\t}public static void usageAndExit(int exitCode, Throwable throwable){\n}
+{\t}public static void usageAndExit(String message, int exitCode){\n}
+{\t}public static void usageAndExit(String message, int exitCode, Throwable throwable){\n}
+{\n}
+{\t}// print out the usage message, followed by the longer help message{\n}
+{\t}public static void help(){\n}
+{\t}public static void help(Throwable throwable){\n}
+{\t}public static void help(String message){\n}
+{\t}public static void help(String message, Throwable throwable){\n}
+{\n}
+{\t}// print out the usage message, followed by the longer help message and exit{\n}
+{\t}public static void helpAndExit(){\n}
+{\t}public static void helpAndExit(Throwable throwable){\n}
+{\t}public static void helpAndExit(String message){\n}
+{\t}public static void helpAndExit(String message, Throwable throwable){\n}
+{\t}public static void helpAndExit(int exitCode){\n}
+{\t}public static void helpAndExit(int exitCode, Throwable throwable){\n}
+{\t}public static void helpAndExit(String message, int exitCode){\n}
+`\t}public static void helpAndExit(String message, int exitCode, Throwable throwable){\n}
+```{\n}
+{\n}
+{\n}
+All message parameters will be pre-pended by  ` [ FATAL ] ` designator.{\n}
+{\n}
