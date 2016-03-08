@@ -5,6 +5,7 @@ plugins {
 	id "maven-publish"
 	id "com.jfrog.bintray" version "1.4"
 	id 'synapticloop.documentr' version '1.1.12'
+	id 'co.riiid.gradle' version '0.4.2'
 }
 
 group = 'synapticloop'
@@ -56,6 +57,19 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 task sourcesJar(type: Jar) {
 	from sourceSets.main.allSource
 	classifier = 'sources'
+}
+
+github {
+	owner = group
+	repo = archivesBaseName
+	if(System.getenv('GITHUB_TOKEN')) {
+		token = System.getenv('GITHUB_TOKEN')
+	}
+	tagName = version
+	name = version
+	assets = [
+		'build/libs/' + archivesBaseName + '-' + version + '.jar'
+	]
 }
 
 publishing {
