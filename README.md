@@ -157,9 +157,9 @@ repositories {
 
 ```
 dependencies {
-	runtime(group: 'synapticloop', name: 'simpleusage', version: 'v1.1.0', ext: 'jar')
+	runtime(group: 'synapticloop', name: 'simpleusage', version: '1.1.1', ext: 'jar')
 
-	compile(group: 'synapticloop', name: 'simpleusage', version: 'v1.1.0', ext: 'jar')
+	compile(group: 'synapticloop', name: 'simpleusage', version: '1.1.1', ext: 'jar')
 }
 ```
 
@@ -167,9 +167,9 @@ or, more simply for versions of gradle greater than 2.4
 
 ```
 dependencies {
-	runtime 'synapticloop:simpleusage:v1.1.0'
+	runtime 'synapticloop:simpleusage:1.1.1'
 
-	compile 'synapticloop:simpleusage:v1.1.0'
+	compile 'synapticloop:simpleusage:1.1.1'
 }
 ```
 
@@ -179,7 +179,7 @@ dependencies {
 <dependency>
 	<groupId>synapticloop</groupId>
 	<artifactId>simpleusage</artifactId>
-	<version>v1.1.0</version>
+	<version>1.1.1</version>
 	<type>jar</type>
 </dependency>
 ```

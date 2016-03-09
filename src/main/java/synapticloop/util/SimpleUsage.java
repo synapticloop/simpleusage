@@ -26,7 +26,7 @@ public class SimpleUsage {
 	 */
 	public static void usage(String message, Throwable throwable) {
 		if(null != message) {
-			System.out.println(String.format(" [ FATAL ] message was: ", message));
+			System.out.println(String.format(" [ FATAL ] message was: %s", message));
 		}
 
 		if(null != throwable) {
@@ -147,11 +147,12 @@ public class SimpleUsage {
 	 */
 	public static void help(String message, Throwable throwable) {
 		if(null != message) {
-			System.out.println(String.format(" [ FATAL ] message was: ", message));
+			System.out.println(String.format(" [ FATAL ] message was: %s", message));
+		} else {
+			System.out.println(" [ FATAL ] error occurred:\n\n ");
 		}
-
 		if(null != throwable) {
-			System.out.println("\n");
+			System.out.println("\nCaused by:\n");
 			throwable.printStackTrace();
 			System.out.println("\n");
 		}
@@ -163,6 +164,7 @@ public class SimpleUsage {
 
 		outputFile(inputStream, FATAL_COULD_NOT_FIND_USAGE);
 		outputFile(inputStream, FATAL_COULD_NOT_FIND_HELP);
+
 	}
 
 	/**
@@ -266,7 +268,7 @@ public class SimpleUsage {
 					System.out.println(line);
 				}
 			} catch(IOException ex) {
-				System.out.println(FATAL_COULD_NOT_FIND_USAGE);
+				// do nothing
 			} finally {
 				if(null != bufferedReader) {
 					try { bufferedReader.close(); } catch (IOException ex) { /* do nothing */}
@@ -274,7 +276,7 @@ public class SimpleUsage {
 			}
 		} else {
 			// input stream is still null 
-			System.out.println(FATAL_COULD_NOT_FIND_USAGE);
+			System.out.println(errorMessage);
 		}
 	}
 
