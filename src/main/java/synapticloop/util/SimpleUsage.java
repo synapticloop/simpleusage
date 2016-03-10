@@ -35,12 +35,7 @@ public class SimpleUsage {
 			System.out.println("\n");
 		}
 
-		InputStream inputStream = SimpleUsage.class.getResourceAsStream(USAGE_TXT_UPPERCASE);
-		if(null == inputStream) {
-			inputStream = SimpleUsage.class.getResourceAsStream(USAGE_TXT_UPPERCASE.toLowerCase());
-		}
-
-		outputFile(inputStream, FATAL_COULD_NOT_FIND_USAGE);
+		outputFile(USAGE_TXT_UPPERCASE, FATAL_COULD_NOT_FIND_USAGE);
 	}
 
 	/**
@@ -162,8 +157,8 @@ public class SimpleUsage {
 			inputStream = SimpleUsage.class.getResourceAsStream(HELP_TXT_UPPERCASE.toLowerCase());
 		}
 
-		outputFile(inputStream, FATAL_COULD_NOT_FIND_USAGE);
-		outputFile(inputStream, FATAL_COULD_NOT_FIND_HELP);
+		outputFile(USAGE_TXT_UPPERCASE, FATAL_COULD_NOT_FIND_USAGE);
+		outputFile(HELP_TXT_UPPERCASE, FATAL_COULD_NOT_FIND_HELP);
 
 	}
 
@@ -257,27 +252,44 @@ public class SimpleUsage {
 		System.exit(exitCode);
 	}
 
-	private static void outputFile(InputStream inputStream, String errorMessage) {
-		BufferedReader bufferedReader = null;
-
-		if(null != inputStream) {
-			bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-			String line = null;
-			try {
-				while((line = bufferedReader.readLine())  != null) {
-					System.out.println(line);
-				}
-			} catch(IOException ex) {
-				// do nothing
-			} finally {
-				if(null != bufferedReader) {
-					try { bufferedReader.close(); } catch (IOException ex) { /* do nothing */}
-				}
+	private static void outputFile(String fileName, String errorMessage) {
+		InputStream inputStream = null;
+		try {
+			inputStream = SimpleUsage.class.getResourceAsStream(fileName);
+			if(null == inputStream) {
+				inputStream = SimpleUsage.class.getResourceAsStream(fileName.toLowerCase());
 			}
-		} else {
-			// input stream is still null 
-			System.out.println(errorMessage);
+
+			if(null == inputStream) {
+				System.out.println(String.format("[ FATAL ] Could not output the file '%s' or '%s'", fileName, fileName.toLowerCase()));
+			}
+
+			BufferedReader bufferedReader = null;
+
+			if(null != inputStream) {
+				bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+				String line = null;
+				try {
+					while((line = bufferedReader.readLine())  != null) {
+						System.out.println(line);
+					}
+				} catch(IOException ex) {
+					// do nothing
+				} finally {
+					if(null != bufferedReader) {
+						try { bufferedReader.close(); } catch (IOException ex) { /* do nothing */ }
+					}
+				}
+			} else {
+				// input stream is still null 
+				System.out.println(errorMessage);
+			}
+		} finally {
+			if(null != inputStream) {
+				try {
+					inputStream.close();
+				} catch (IOException ex) { /* do nothing */ }
+			}
 		}
 	}
-
 }
